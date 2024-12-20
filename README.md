@@ -46,7 +46,7 @@ To overcome mode collapse, we implemented batch normalization, which helped make
 
 We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
 
-Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48, 10, and 3 real rock wall hold examples. All of these experiments enabled us to produce convincing holds! The models trained on fewer examples did turn out better. Using fewer real training examples also made it easier to verify that our GAN generated something new!
+Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48, 20, 10, and 3 real rock wall hold examples. All of these experiments enabled us to produce convincing holds! The models trained on fewer examples did turn out better. Using fewer real training examples also made it easier to verify that our GAN generated something new!
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
