@@ -18,7 +18,8 @@ Ultimately, it was very difficult for our model to learn from our entire dataset
 7. Output post-processing
 8. Output visualization
 9. Output gallery
-10. Citations
+10. Bloopers
+11. Citations
 
 ## Data pre-processing
 Pre-processing consists of converting a directory of STL files of rock wall holds into scaled voxels using Trimesh. We then save matrix representations of these voxels using numpy arrays. These numpy arrays are stored in separate .npy files. Our custom dataloader class retrieves the data from one npy file at a time.
@@ -88,6 +89,26 @@ z_padding = int(math.floor((32 - voxel_matrix.shape[2]) / 2))
 # Put the voxel occupancy in its designated spot in the empty 3D Matrix
 reshaped_voxel[x_padding: x_padding + voxel_matrix.shape[0], y_padding: y_padding + voxel_matrix.shape[1], z_padding: z_padding + voxel_matrix.shape[2]] = voxel_matrix
 ```
+### Saving the data 
+We save each voxel's matrix representation to a separate numpy file. Each npy file saves a single real rock wall hold voxel. Each numpy file is named with its corrresponding index in the data. To load this data, we wrote a custom dataloader. In the get_item function, we retrieve each data point using its index to load it from the file it is stored in.
+
+Here is how we save the data:
+```python
+# Save reshaped voxel as a numpy array
+np.save(f'processed_npys/{file_name_counter}.npy', reshaped_voxel)
+```
+
+Here is how we load it in the get_item function:
+```python
+def __getitem__(self, idx):
+        # print(self.data[idx].shape)
+        idx = idx +
+        data_pt = np.load(f"/content/drive/My Drive/TanGen Data/processed_npys/{idx}.npy")
+        print(f"/content/drive/My Drive/TanGen Data/processed_npys/{idx}.npy")
+        dp = torch.tensor(data_pt, dtype=torch.float32)
+        return dp.unsqueeze(0)
+```
+
 
 The voxels in the dataloader serve as our real data in the GAN training. To train the generator and the discriminator, we feed the generator random noise and then feed the output from the generator into the discriminator. We also feed the discriminator real data so it can make predictions about what is real and fake. The discriminator determines whether the output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. By the end of training, when we do a forward pass of the generator and input random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
 In post processing, we take the output of the generator, turn it into a trimesh voxel, and then use the marching cubes algorithm to convert it into a mesh. This mesh is then saved in an STL file that we can use to 3D print the generated rock wall holds.
