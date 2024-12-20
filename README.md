@@ -25,12 +25,12 @@ We imagine this project could be extended to take user data into account, such a
 ### Wall we hit #1
 Before we arrived at using voxels to represent our meshes, we went through many different data formats. We learned that it is really difficult to triangulate sparse vertices that were randomly generated. We also learned that height maps of sparse vertices are just as sparce and therefore do not help with triangulation. We implemented raycasting to make the data less sparse, but that also yielded poor results after triangulation. 
 
-Here are some outputs from the other approaches we tried: 
+Here are some outputs from the other approaches we tried. This is a 3D height map of a dolphin we were using for initial experiments:
 
-This is a 3D height map of a dolphin we were using for initial experiments:
 <img src="photos/Screenshot%20from%202024-12-09%2000-35-41.png" alt="Project Logo" width="300" />
 
 This is the STL of the height map. It did not slice well when we tried to print it:
+
 <img src="photos/Screenshot%20from%202024-12-09%2001-19-33.png" alt="Project Logo" width="300" />
 
 ### How we overcame the wall
