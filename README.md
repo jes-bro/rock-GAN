@@ -53,6 +53,14 @@ We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of t
 
 ## Usage Guide
 
+### If you want to use your own data...
+First, run our data pre-processing script to generate numpy files of STLs:
+```python
+```
+
+### If you want to use our data...
+Then you do not need to run the data pre-processing script. Simply change the path to the data directory in the training script notebook. You should be all set to train a GAN to make rock wall holds! 
+
 ## Technical Deep Dive
 
 ### Data pre-processing
