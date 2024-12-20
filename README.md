@@ -50,7 +50,7 @@ We also found out that using uni-modal data for our model, (ie. one kind of rock
 
 Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48, 32, 20, 10, and 3 real rock wall hold examples. All of these experiments enabled us to produce convincing holds! The models trained on 32 examples turned out best. Using fewer real training examples also made it easier to verify that our GAN generated something new!
 
-Here are some examples of the real training examples we gave a model and the generated output:
+Here are some examples of the generated outputs of our model:
 
 <img src="photos/Screenshot%20from%202024-12-20%2000-41-03.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2023-00-50.png" alt="Project Logo" width="300" height="300" />  <img src="photos/Screenshot%20from%202024-12-18%2023-25-26.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-42-57.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2023-16-11.png" alt="Project Logo" width="300" height="300" /> 
 
