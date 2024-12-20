@@ -1,4 +1,5 @@
 # rock-GAN
+
 ## Project Overview 
 
 This script trains a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to 3D print the holds. 
@@ -50,10 +51,16 @@ Our data was ordered in such a way that holds close to each other were of the sa
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
+### Results
+
+We 3D printed some of the holds we generated and made a cardboard/ 3D printed rock wall. Here are photos of the results!
+
+
+
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
 
-To run this locally, we used the [jaxrl]() conda environment from the BRIDGE Widow-X repo. We found that it has the dependencies necessary to run this code. 
+To run this locally, we used the [jaxrl](https://github.com/rail-berkeley/bridge_data_v2) conda environment from the BRIDGE dataset repo. We found that it has the dependencies necessary to run this code. 
 
 We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of the project, however, we used Google Colab. The main dependency that Colab did not have was trimesh. In the notebook, we have a cell that makes installing trimesh easier.
 
@@ -62,6 +69,8 @@ We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of t
 ### If you want to use your own data...
 First, run our data pre-processing script to generate numpy files of STLs:
 ```python
+cd rock-Gan
+python data_preprocessing.py
 ```
 
 ### If you want to use our data...
@@ -192,5 +201,11 @@ mc.export("test5.stl")
 We visualize the output using matplotlib. 
 
 Here are some sample outputs!
+
+<img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2022-08-20.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-34-49.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18 22-21-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19 02-42-57.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2003-54-14.png" alt="Project Logo" width="300" height="300" /> 
+
+## What we learned
+
+One thing I learned is to be more organized about our experiments, automate them, and log the results. I think that would have spared us in some situations where we could not remember what we tried. 
 
 ## Citations
