@@ -1,3 +1,17 @@
+"""
+Script for pre-processing meshes prior to use in the TanGen GAN network
+training. 
+
+This script takes in meshes and:
+1. Makes a folder called "processed_npys"
+2. Centers the meshes
+3. Normalizes them within a unit sphere
+4. Converts them to 32x32x32 binary voxel arrays through cropping and padding
+5. Saves the voxel arrays as numpy files
+6. Repeats this for all meshes in the specified source folder 
+        ("unprocessed_data" by default)
+"""
+
 import trimesh
 import numpy as np
 import os
