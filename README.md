@@ -195,4 +195,8 @@ We visualize the output using matplotlib.
 
 Here are some sample outputs!
 
+## What we learned
+
+One thing I learned is to be more organized about our experiments, automate them, and log the results. I think that would have spared us in some situations where we could not remember what we tried. 
+
 ## Citations
