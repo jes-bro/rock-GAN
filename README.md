@@ -45,7 +45,8 @@ Our data was ordered in such a way that holds close to each other were of the sa
 Here are some examples of the real training examples we gave a model and the generated output:
 
 ## Installation 
-Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](). 
+Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
+
 ## Usage Guide
 
 ## Technical Deep Dive
