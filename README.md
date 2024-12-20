@@ -27,10 +27,10 @@ Before we arrived at using voxels to represent our meshes, we went through many 
 
 Here are some outputs from the other approaches we tried: 
 
-![Project Logo](photos/Screenshot from 2024-12-09 00-35-41.png)
+![Project Logo](photos/Screenshot%20from%202024-12-09%2001-35-41.png)
 This is a 3D height map of a dolphin we were using for initial experiments. 
 
-![Project Logo](~/photos/Screenshot from 2024-12-09 01-19-33.png)
+![Project Logo](photos/Screenshot%20from%202024-12-09%2001-19-33.png)
 This is the STL of the height map. It did not slice well when we tried to print it. 
 
 ### How we overcame the wall
