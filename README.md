@@ -51,6 +51,8 @@ Our data was ordered in such a way that holds close to each other were of the sa
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
+<img src="photos/Screenshot%20from%202024-12-20%2000-41-03.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2023-00-50.png" alt="Project Logo" width="300" height="300" />  <img src="photos/Screenshot%20from%202024-12-18%2023-25-26.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-42-57.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2023-16-11.png" alt="Project Logo" width="300" height="300" /> 
+
 ### Results
 
 We 3D printed some of the holds we generated and made a cardboard/3D printed rock wall. Here are photos of the results!
