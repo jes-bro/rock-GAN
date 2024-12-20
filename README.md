@@ -53,7 +53,7 @@ Here are some examples of the real training examples we gave a model and the gen
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
 
-To run this locally, we used the [jaxrl]() conda environment from the BRIDGE Widow-X repo. We found that it has the dependencies necessary to run this code. 
+To run this locally, we used the [jaxrl](https://github.com/rail-berkeley/bridge_data_v2) conda environment from the BRIDGE dataset repo. We found that it has the dependencies necessary to run this code. 
 
 We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of the project, however, we used Google Colab. The main dependency that Colab did not have was trimesh. In the notebook, we have a cell that makes installing trimesh easier.
 
