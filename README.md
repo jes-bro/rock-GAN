@@ -11,7 +11,7 @@ Ultimately, it was very difficult for our model to learn from our entire dataset
 
 1. Installation
 2. Usage Guide
-3. Data pre-processing 
+3. Data pre-processing         
 4. Loading the data into a custom dataloader
 5. Defining the model architecture
 6. Defining training parameters, weight intitialization and loss functions
@@ -64,6 +64,30 @@ verts_normalized = verts/scale
 normalized_mesh = trimesh.Trimesh(vertices=verts_normalized, faces=faces_idx)
 ```
 
+### Saving voxelized data
+For each real rock wall hold, we created an empty 32x32x32 matrix and then populated that matrix with the scaled voxel. We did this by padding the voxel to match the dimensions of the matrix and then setting the matrix equal to the voxel. 
+Here is how we did it:
+```python
+# Convert the voxel into a np array and pad it
+voxel_matrix = voxel.matrix
+
+# Cropping the matrix to make sure it's within 32x32x32
+voxel_matrix = voxel_matrix[0:32, 0:32, 0:32]
+
+reshaped_voxel = np.zeros((32, 32, 32))
+
+if any(dim > 32 for dim in voxel_matrix.shape):
+        print("ERROR: Voxel Exceeded 32x32x32. Skipping")
+        continue
+
+# Find the required voxel padding
+x_padding = int(math.floor((32 - voxel_matrix.shape[0]) / 2))
+y_padding = int(math.floor((32 - voxel_matrix.shape[1]) / 2))
+z_padding = int(math.floor((32 - voxel_matrix.shape[2]) / 2))
+
+# Put the voxel occupancy in its designated spot in the empty 3D Matrix
+reshaped_voxel[x_padding: x_padding + voxel_matrix.shape[0], y_padding: y_padding + voxel_matrix.shape[1], z_padding: z_padding + voxel_matrix.shape[2]] = voxel_matrix
+```
 
 The voxels in the dataloader serve as our real data in the GAN training. To train the generator and the discriminator, we feed the generator random noise and then feed the output from the generator into the discriminator. We also feed the discriminator real data so it can make predictions about what is real and fake. The discriminator determines whether the output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. By the end of training, when we do a forward pass of the generator and input random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
 In post processing, we take the output of the generator, turn it into a trimesh voxel, and then use the marching cubes algorithm to convert it into a mesh. This mesh is then saved in an STL file that we can use to 3D print the generated rock wall holds.
