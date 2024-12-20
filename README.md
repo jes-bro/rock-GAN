@@ -12,14 +12,15 @@ Ultimately, it was very difficult for our model to learn from our entire dataset
 1. Installation
 2. Usage Guide
 3. Data pre-processing         
-4. Loading the data into a custom dataloader
+4. Loading the data using a custom dataloader
 5. Defining the model architecture
 6. Defining training parameters, weight intitialization and loss functions
-7. Output post-processing
-8. Output visualization
-9. Output gallery
-10. Bloopers
-11. Citations
+7. Training Loop
+8. Post-processing
+9. Visualization
+10. Output gallery
+11. Bloopers
+12. Citations
 
 ## Data pre-processing
 Pre-processing consists of converting a directory of STL files of rock wall holds into scaled voxels using Trimesh. We then save matrix representations of these voxels using numpy arrays. These numpy arrays are stored in separate .npy files. Our custom dataloader class retrieves the data from one npy file at a time.
@@ -89,13 +90,17 @@ z_padding = int(math.floor((32 - voxel_matrix.shape[2]) / 2))
 # Put the voxel occupancy in its designated spot in the empty 3D Matrix
 reshaped_voxel[x_padding: x_padding + voxel_matrix.shape[0], y_padding: y_padding + voxel_matrix.shape[1], z_padding: z_padding + voxel_matrix.shape[2]] = voxel_matrix
 ```
-We save each voxel's matrix representation to a separate numpy file. Each npy file saves a single real rock wall hold voxel. Each numpy file is named with its corrresponding index in the data. To load this data, we wrote a custom dataloader. In the get_item function, we retrieve each data point using its index to load it from the file it is stored in.
+We save each voxel's matrix representation to a separate numpy file. Each npy file saves a single real rock wall hold voxel. Each numpy file is named with its corrresponding index in the data. 
 
 Here is how we save the data:
 ```python
 # Save reshaped voxel as a numpy array
 np.save(f'processed_npys/{file_name_counter}.npy', reshaped_voxel)
 ```
+
+### Loading the data into a custom dataloader
+
+To load this data, we wrote a custom dataloader. In the get_item function, we retrieve each data point using its index to load it from the file it is stored in.
 
 Here is how we load it in the get_item function:
 ```python
@@ -108,8 +113,37 @@ def __getitem__(self, idx):
         return dp.unsqueeze(0)
 ```
 
+### Defining the model architecture
 
-The voxels in the dataloader serve as our real data in the GAN training. To train the generator and the discriminator, we feed the generator random noise and then feed the output from the generator into the discriminator. We also feed the discriminator real data so it can make predictions about what is real and fake. The discriminator determines whether the output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. By the end of training, when we do a forward pass of the generator and input random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
-In post processing, we take the output of the generator, turn it into a trimesh voxel, and then use the marching cubes algorithm to convert it into a mesh. This mesh is then saved in an STL file that we can use to 3D print the generated rock wall holds.
+### Training Loop
+To train the generator and the discriminator, we feed the generator random noise. Then, we feed the output from the generator into the discriminator. We also feed the discriminator real data. The discriminator determines whether output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. 
 
-Now, let's get into the script!
+By the end of training, when we feed the generator random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
+
+### Post-processing
+In post processing, we take the output of the generator, turn it into a trimesh voxel, and then use the marching cubes algorithm to convert it into a mesh. This mesh is then saved in an STL file that we can use to 3D print the ge`nerated rock wall holds.
+
+Here is the code we use to do that:
+```python
+fake = netG(noise).squeeze()
+threshold = 0.7  # We adjust this depending on whether or not it helps make the holds easier to print
+binary_fake = (fake > threshold).cpu().numpy().astype(bool)
+print("Voxel grid unique values:", np.unique(binary_fake))
+print(fake.shape)
+
+
+new_voxel = trimesh.voxel.base.VoxelGrid(binary_fake)
+
+print(f"voxel: {new_voxel.shape}")
+mc = new_voxel.marching_cubes
+
+# Save the remeshed surface as an STL file
+mc.export("test5.stl")
+```
+
+### Visualization 
+We visualize the output using matplotlib. 
+
+Here are some sample outputs!
+
+### Bloopers
