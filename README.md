@@ -1,5 +1,5 @@
 # TanGen
-<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="300" /> ![photos/IMG_5139-ezgif.com-resize.gif](photos/IMG_5139-ezgif.com-resize.gif) <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="300" /> 
+![photos/IMG_5139-ezgif.com-resize.gif](photos/IMG_5139-ezgif.com-resize.gif) <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="300" /> 
 
 ## Project Overview 
 
