@@ -51,6 +51,12 @@ Our data was ordered in such a way that holds close to each other were of the sa
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
+### Results
+
+We 3D printed some of the holds we generated and made a cardboard/ 3D printed rock wall. Here are photos of the results!
+
+
+
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
 
