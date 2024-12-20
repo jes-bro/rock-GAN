@@ -1,5 +1,6 @@
 # TanGen
-<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="350" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="350" /> 
+<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="350" /> ![gif](photos/IMG_5139.GIF) <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="350" /> 
+
 ## Project Overview 
 
 TanGen, short for tangible generation, is a system for generating 3D rock wall hold STL files that you can 3D print.
