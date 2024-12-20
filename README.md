@@ -1,8 +1,10 @@
-# rock-GAN
-
+# TanGen
+<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="300" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="300" /> 
 ## Project Overview 
 
-This script trains a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to 3D print the holds. 
+TanGen, short for tangible generation, is a system for generating 3D rock wall hold STL files that you can 3D print.
+
+We trained a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to print the holds. 
 
 The real data used to train the GAN are open-source STL files of rock wall holds from Thingiverse. 
 
