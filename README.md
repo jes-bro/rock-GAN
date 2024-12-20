@@ -6,21 +6,15 @@ This script trains a Generalized Adversarial Network (GAN) to generate rock wall
 The real data used to train the GAN are open-source STL files of rock wall holds from Thingiverse. 
 
 ## README Table of Contents 
-
-1. The Story
-2. Installation
-3. Usage Guide
-4. Data pre-processing         
-5. Loading the data using a custom dataloader
-6. Defining the model architecture
-7. Defining training parameters, weight intitialization and loss functions
-8. Training Loop
-9. Post-processing
-10. Visualization
-11. Output gallery
-12. Bloopers
-13. What We Learned
-14. Citations
+1. The Story  
+2. Installation  
+3. Usage Guide  
+4. Technical Deep Dive  
+5. Visualization  
+6. Output Gallery  
+7. Bloopers  
+8. What We Learned  
+9. Citations
 
 ## The story 
 ### Why this project?
@@ -51,10 +45,12 @@ Our data was ordered in such a way that holds close to each other were of the sa
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
-## Data pre-processing
+## Technical Deep Dive
+
+### Data pre-processing
 Pre-processing consists of converting a directory of STL files of rock wall holds into scaled voxels using Trimesh. We then save matrix representations of these voxels using numpy arrays. These numpy arrays are stored in separate .npy files. Our custom dataloader class retrieves the data from one npy file at a time.
 
-### Raw Mesh Data 
+#### Raw Mesh Data 
 
 Our raw mesh data is loaded using trimesh. We downloaded a series of rock wall hold STL files from Thingiverse to obtain our original mesh data. Then, we used Trimesh to load the meshes from the STLs, voxelize the meshes, and save a matrix representation from each voxel as a numpy array. 
 
@@ -72,7 +68,7 @@ for filename in os.listdir(folderpath):
                 # .
                 # ... Normalizing, scaling, storing code ...
 ```
-### Normalizing and Scaling
+#### Normalizing and Scaling
 
 We load each mesh and normalize the vertices to be within a sphere with a radius of one, centered at (0, 0, 0). Then, we voxelize the mesh and scale it to be within a range of 32x32x32. We used the following [pytorch3D tutorial](https://colab.research.google.com/github/facebookresearch/pytorch3d/blob/stable/docs/tutorials/deform_source_mesh_to_target_mesh.ipynb) as the initial inspiration for how to do this, but ended up using Trimesh instead. 
 
@@ -95,7 +91,7 @@ verts_normalized = verts/scale
 normalized_mesh = trimesh.Trimesh(vertices=verts_normalized, faces=faces_idx)
 ```
 
-### Saving voxelized data
+#### Saving voxelized data
 For each real rock wall hold, we created an empty 32x32x32 matrix and then populated that matrix with the scaled voxel. We did this by padding the voxel to match the dimensions of the matrix and then setting the matrix equal to the voxel. 
 Here is how we did it:
 ```python
@@ -127,7 +123,7 @@ Here is how we save the data:
 np.save(f'processed_npys/{file_name_counter}.npy', reshaped_voxel)
 ```
 
-## Loading the data into a custom dataloader
+### Loading the data into a custom dataloader
 
 To load this data, we wrote a custom dataloader. In the get_item function, we retrieve each data point using its index to load it from the file it is stored in.
 
@@ -142,14 +138,14 @@ def __getitem__(self, idx):
         return dp.unsqueeze(0)
 ```
 
-## Defining the model architecture
+### Defining the model architecture
 
-## Training Loop
+### Training Loop
 To train the generator and the discriminator, we feed the generator random noise. Then, we feed the output from the generator into the discriminator. We also feed the discriminator real data. The discriminator determines whether output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. 
 
 By the end of training, when we feed the generator random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
 
-## Post-processing
+### Post-processing
 In post processing, we take the output of the generator, turn it into a trimesh voxel, and then use the marching cubes algorithm to convert it into a mesh. This mesh is then saved in an STL file that we can use to 3D print the ge`nerated rock wall holds.
 
 Here is the code we use to do that:
