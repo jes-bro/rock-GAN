@@ -34,7 +34,7 @@ Before we arrived at using voxels to represent our meshes, we went through many 
 
 Here are some outputs from the other approaches we tried: 
 
-### How we overcame wall #1
+### How we overcame
 We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
 
 Here are some voxel visualizations: 
@@ -42,7 +42,7 @@ Here are some voxel visualizations:
 ### Wall we hit #2
 Ultimately, it was very difficult for our model to learn from our entire dataset of 220 holds. Our network architecture was small, and we did not have enough data to prevent mode collapse. We also had very diverse data and not a good means of clustering the data in the model's latent space. This made it so that regardless of noise input, for a given model, it would produce the same hold every time. We attempted to implement latent space clustering methods, but we did not have enough time to trouble shoot that implementation and make it work. 
 
-### How we overcame wall #2
+### How we overcame
 To overcome mode collapse, we implemented batch normalization, which helped make it so that different noise vectors produced slightly different holds after being passed through the GAN. 
 
 We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
