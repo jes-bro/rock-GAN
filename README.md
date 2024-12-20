@@ -12,8 +12,7 @@ The real data used to train the GAN are open-source STL files of rock wall holds
 4. Technical Deep Dive  
 5. Visualization  
 6. Output Gallery  
-7. Bloopers  
-8. What We Learned  
+7. What We Learned  
 9. Citations
 
 ## The story 
@@ -41,9 +40,13 @@ To overcome mode collapse, we implemented batch normalization, which helped make
 
 We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
 
-Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model somewhere between 3 and 10 real rock wall hold examples. Using fewer real training examples also made it easier to verify that our GAN generated something new!
+Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48 real rock wall hold examples. Using fewer real training examples also made it easier to verify that our GAN generated something new!
 
 Here are some examples of the real training examples we gave a model and the generated output:
+
+## Installation 
+Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](). 
+## Usage Guide
 
 ## Technical Deep Dive
 
