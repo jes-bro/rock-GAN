@@ -27,7 +27,7 @@ Before we arrived at using voxels to represent our meshes, we went through many 
 
 Here are some outputs from the other approaches we tried: 
 
-![Project Logo](photos/Screenshot%20from%202024-12-09%2001-35-41.png)
+<img src="photos/Screenshot%20from%202024-12-09%2000-35-41.png" alt="Project Logo" width="300" />
 This is a 3D height map of a dolphin we were using for initial experiments. 
 
 <img src="photos/Screenshot%20from%202024-12-09%2001-19-33.png" alt="Project Logo" width="300" />
