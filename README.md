@@ -1,4 +1,5 @@
 # rock-GAN
+
 ## Project Overview 
 
 This script trains a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to 3D print the holds. 
@@ -194,6 +195,8 @@ mc.export("test5.stl")
 We visualize the output using matplotlib. 
 
 Here are some sample outputs!
+
+<img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" /> <img src="photos/Screenshot%20from%202024-12-18%2022-08-20.png" alt="Project Logo" width="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-34-49.png" alt="Project Logo" width="300" /> <img src="photos/Screenshot%20from%202024-12-18 22-21-54.png" alt="Project Logo" width="300" />
 
 ## What we learned
 
