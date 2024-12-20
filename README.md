@@ -30,7 +30,7 @@ Here are some outputs from the other approaches we tried:
 ![Project Logo](photos/Screenshot%20from%202024-12-09%2001-35-41.png)
 This is a 3D height map of a dolphin we were using for initial experiments. 
 
-![Project Logo](photos/Screenshot%20from%202024-12-09%2001-19-33.png)
+<img src="photos/Screenshot%20from%202024-12-09%2001-19-33.png" alt="Project Logo" width="300" />
 This is the STL of the height map. It did not slice well when we tried to print it. 
 
 ### How we overcame the wall
@@ -46,7 +46,7 @@ To overcome mode collapse, we implemented batch normalization, which helped make
 
 We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
 
-Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48 real rock wall hold examples. (This enabled us to produce convincing holds?). Using fewer real training examples also made it easier to verify that our GAN generated something new!
+Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48, 10, and 3 real rock wall hold examples. All of these experiments enabled us to produce convincing holds! The models trained on fewer examples did turn out better. Using fewer real training examples also made it easier to verify that our GAN generated something new!
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
