@@ -27,11 +27,11 @@ Before we arrived at using voxels to represent our meshes, we went through many 
 
 Here are some outputs from the other approaches we tried: 
 
+This is a 3D height map of a dolphin we were using for initial experiments:
 <img src="photos/Screenshot%20from%202024-12-09%2000-35-41.png" alt="Project Logo" width="300" />
-This is a 3D height map of a dolphin we were using for initial experiments. 
 
+This is the STL of the height map. It did not slice well when we tried to print it:
 <img src="photos/Screenshot%20from%202024-12-09%2001-19-33.png" alt="Project Logo" width="300" />
-This is the STL of the height map. It did not slice well when we tried to print it. 
 
 ### How we overcame the wall
 We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
