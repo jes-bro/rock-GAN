@@ -4,8 +4,9 @@ import os
 import math
 file_name_counter = 0
 
+# Specify the path to the folder with your unprocessed meshes below
 folderpath = 'unprocessed_data'
-os.makedirs('processed_npys_4', exist_ok=True)
+os.makedirs('processed_npys', exist_ok=True)
 for filename in os.listdir(folderpath):
         file_path = os.path.join(folderpath, filename)
         if os.path.isfile(file_path):  # Check if it's a file
@@ -28,7 +29,7 @@ for filename in os.listdir(folderpath):
                 # Voxelize the mesh
                 voxel = trimesh.voxel.creation.voxelize(normalized_mesh, 0.0625, method="subdivide")
                 
-                # Convert the voxel into a np array and pad it
+                # Convert the voxel into a np array
                 voxel_matrix = voxel.matrix
 
                 # Cropping the matrix to make sure it's within 32x32x32
@@ -40,23 +41,20 @@ for filename in os.listdir(folderpath):
                         print("ERROR: Voxel Exceeded 32x32x32. Skipping")
                         continue
 
-                # FInd the required voxel padding
+                # Pad the voxel array to make sure it is 32x32x32
+                # Calculate the required padding on all sides of the model
                 x_padding = int(math.floor((32 - voxel_matrix.shape[0]) / 2))
                 y_padding = int(math.floor((32 - voxel_matrix.shape[1]) / 2))
                 z_padding = int(math.floor((32 - voxel_matrix.shape[2]) / 2))
 
                 # Put the voxel occupancy in its designated spot in the empty 3D Matrix
                 reshaped_voxel[x_padding: x_padding + voxel_matrix.shape[0], y_padding: y_padding + voxel_matrix.shape[1], z_padding: z_padding + voxel_matrix.shape[2]] = voxel_matrix
-                reshaped_voxel_rot1 = np.rot90(reshaped_voxel, k=1, axes=(0, 1))
-                reshaped_voxel_rot2 = np.rot90(reshaped_voxel, k=2, axes=(0, 1))
-                reshaped_voxel_rot3 = np.rot90(reshaped_voxel, k=3, axes=(0, 1))
 
                 # Save reshaped voxel as a numpy array
-                np.save(f'processed_npys_4/{file_name_counter}.npy', reshaped_voxel) 
-                np.save(f'processed_npys_4/{file_name_counter+1}.npy', reshaped_voxel_rot1)
-                np.save(f'processed_npys_4/{file_name_counter+2}.npy', reshaped_voxel_rot2)
-                np.save(f'processed_npys_4/{file_name_counter+3}.npy', reshaped_voxel_rot3)
+                np.save(f'processed_npys/{file_name_counter}.npy', reshaped_voxel) 
 
                 print(f"Processed: {filename} as {file_name_counter}.npy")
                 # Increase the file name number
-                file_name_counter += 4
+                file_name_counter += 1
+
+print("All Done!")
