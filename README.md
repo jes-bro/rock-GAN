@@ -212,4 +212,12 @@ Here are some sample outputs! (Different from the ones above)
 
 One thing I learned is to be more organized about our experiments, automate them, and log the results. I think that would have spared us in some situations where we could not remember what we tried. 
 
-## Citations
+## Works Cited
+
+MIT 3D GAN Paper: [http://3dgan.csail.mit.edu/](http://3dgan.csail.mit.edu/)
+
+JaxRL Conda Environment: [https://github.com/rail-berkeley/bridge_data_v2](https://github.com/rail-berkeley/bridge_data_v2)
+
+PyTorch 3D Tutorial: [https://colab.research.google.com/github/facebookresearch/pytorch3d/blob/stable/docs/tutorials/deform_source_mesh_to_target_mesh.ipynb](https://colab.research.google.com/github/facebookresearch/pytorch3d/blob/stable/docs/tutorials/deform_source_mesh_to_target_mesh.ipynb)
+
+
