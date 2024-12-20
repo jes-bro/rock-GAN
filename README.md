@@ -175,6 +175,11 @@ def __getitem__(self, idx):
 ```
 
 ### Defining the model architecture
+Our model architecture is heavily inspired by that of "Learning a Probabilistic Latent Space of Object Shapes via 3D Generative-Adversarial Modeling" (Wu et al.). We essentially have a purely convolutional generator mirrored by a purely convolutional discriminator.
+
+The generator has 5 transpose 3D convolutional layers. They are all the same in the sense that all have kernel size 4, stride 2 and 1 layer of zero padding around the input. This essentially scales the voxel dimensions by a factor of 2 after each layer leading to cubic voxel tensor sizes of 1, 2, 4, 8, 16, and finally 32. The number of noise channels at the input is 5, with intermediate channel counts of 512, 256, 128, 64, and finally 1 at the output. The first four transpose convolutional layers are batch normalized for training stability and are all activated by Leaky ReLU. The final layer is activated by a tanh function. 
+
+The discriminator has 5 regular 3D convolutional layers. All have a kernel sizeof 4, stride 2, and 1 layer of zero padding around the inputs. This does the inverse of the generator and scales the inputs by a factor of 1/2. The discriminator takes cubic voxel tensors of size 32 at its input, and so the dimensions go from 32 to 16, 8, 4, 2, and finally 1 at the ouput allowing the discriminator to generate a binary classification between "real" (1) and "synthetic" (0). The intermediate channel counts are mostly mirrors of the generator going from 1 to 64, 128, 256, 512, and finally back to 1 for the binary classification. 
 
 ### Training loop
 To train the generator and the discriminator, we feed the generator random noise. Then, we feed the output from the generator into the discriminator. We also feed the discriminator real data. The discriminator determines whether output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. 
