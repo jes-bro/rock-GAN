@@ -5,23 +5,46 @@ This script trains a Generalized Adversarial Network (GAN) to generate rock wall
 
 The real data used to train the GAN are open-source STL files of rock wall holds from Thingiverse. 
 
-Ultimately, it was very difficult for our model to learn from our entire dataset of 220 holds, so instead we give it a smaller amount of data, usually somewhere between 3 and 10 holds to generate new data from. This also made it easier to verify that our GAN was actually generating something new!
-
 ## README Table of Contents 
 
-1. Installation
-2. Usage Guide
-3. Data pre-processing         
-4. Loading the data using a custom dataloader
-5. Defining the model architecture
-6. Defining training parameters, weight intitialization and loss functions
-7. Training Loop
-8. Post-processing
-9. Visualization
-10. Output gallery
-11. Bloopers
-12. What We Learned
-13. Citations
+1. The Story
+2. Installation
+3. Usage Guide
+4. Data pre-processing         
+5. Loading the data using a custom dataloader
+6. Defining the model architecture
+7. Defining training parameters, weight intitialization and loss functions
+8. Training Loop
+9. Post-processing
+10. Visualization
+11. Output gallery
+12. Bloopers
+13. What We Learned
+14. Citations
+
+## The story 
+
+### Wall We Hit #1
+Before we arrived at using voxels to represent our meshes, we went through many different data formats. We learned that it is really difficult to triangulate sparse vertices that were randomly generated. We also learned that height maps of sparse vertices are just as sparce and therefore do not help with triangulation. We implemented raycasting to make the data less sparse, but that also yielded poor results after triangulation. 
+
+Here are some outputs from the other approaches we tried: 
+
+### How we overcame it
+We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
+
+Here are some voxel visualizations: 
+
+### Wall We Hit #2
+Ultimately, it was very difficult for our model to learn from our entire dataset of 220 holds. Our network architecture was small, and we did not have enough data to prevent mode collapse. We also had very diverse data and not a good means of clustering the data in the model's latent space. This made it so that regardless of noise input, for a given model, it would produce the same hold every time. We attempted to implement latent space clustering methods, but we did not have enough time to trouble shoot that implementation and make it work. 
+
+### How we overcame it
+To overcome mode collapse, we implemented batch normalization, which helped make it so that different noise vectors produced slightly different holds after being passed through the GAN. 
+
+We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
+
+Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model somewhere between 3 and 10 real rock wall hold examples. Using fewer real training examples also made it easier to verify that our GAN generated something new!
+
+Here are some examples of the real training examples we gave a model and the generated output:
 
 ## Data pre-processing
 Pre-processing consists of converting a directory of STL files of rock wall holds into scaled voxels using Trimesh. We then save matrix representations of these voxels using numpy arrays. These numpy arrays are stored in separate .npy files. Our custom dataloader class retrieves the data from one npy file at a time.
@@ -146,12 +169,5 @@ mc.export("test5.stl")
 We visualize the output using matplotlib. 
 
 Here are some sample outputs!
-
-## Bloopers
-Before we arrived at using voxels to represent our meshes, we went through many different data formats. We learned that it's really hard to triangulate sparse vertices that were randomly generated. We also learned that height maps of sparse vertices are just as sparce and therefore do not help with triangulation. We implemented raycasting to make the data less sparse, but that also yielded poor results after triangulation. 
-
-Here are some outputs from the other approaches we tried: 
-
-## What We Learned
 
 ## Citations
