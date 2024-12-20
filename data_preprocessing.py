@@ -4,8 +4,8 @@ import os
 import math
 file_name_counter = 0
 
-folderpath = './unprocessed_data'
-os.makedirs('processed_npys', exist_ok=True)
+folderpath = 'unprocessed_data'
+os.makedirs('processed_npys_4', exist_ok=True)
 for filename in os.listdir(folderpath):
         file_path = os.path.join(folderpath, filename)
         if os.path.isfile(file_path):  # Check if it's a file
@@ -47,10 +47,16 @@ for filename in os.listdir(folderpath):
 
                 # Put the voxel occupancy in its designated spot in the empty 3D Matrix
                 reshaped_voxel[x_padding: x_padding + voxel_matrix.shape[0], y_padding: y_padding + voxel_matrix.shape[1], z_padding: z_padding + voxel_matrix.shape[2]] = voxel_matrix
+                reshaped_voxel_rot1 = np.rot90(reshaped_voxel, k=1, axes=(0, 1))
+                reshaped_voxel_rot2 = np.rot90(reshaped_voxel, k=2, axes=(0, 1))
+                reshaped_voxel_rot3 = np.rot90(reshaped_voxel, k=3, axes=(0, 1))
 
                 # Save reshaped voxel as a numpy array
-                np.save(f'processed_npys/{file_name_counter}.npy', reshaped_voxel) 
-                
+                np.save(f'processed_npys_4/{file_name_counter}.npy', reshaped_voxel) 
+                np.save(f'processed_npys_4/{file_name_counter+1}.npy', reshaped_voxel_rot1)
+                np.save(f'processed_npys_4/{file_name_counter+2}.npy', reshaped_voxel_rot2)
+                np.save(f'processed_npys_4/{file_name_counter+3}.npy', reshaped_voxel_rot3)
+
                 print(f"Processed: {filename} as {file_name_counter}.npy")
                 # Increase the file name number
-                file_name_counter += 1
+                file_name_counter += 4
