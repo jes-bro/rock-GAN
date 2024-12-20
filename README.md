@@ -204,7 +204,7 @@ mc.export("test5.stl")
 ## Visualization 
 We visualize the output using matplotlib. 
 
-Here are some sample outputs!
+Here are some sample outputs! (Different from the ones above)
 
 <img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2022-08-20.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-34-49.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18 22-21-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19 02-42-57.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2003-54-14.png" alt="Project Logo" width="300" height="300" /> 
 
