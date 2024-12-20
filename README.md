@@ -40,12 +40,16 @@ To overcome mode collapse, we implemented batch normalization, which helped make
 
 We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
 
-Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48 real rock wall hold examples. Using fewer real training examples also made it easier to verify that our GAN generated something new!
+Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48 real rock wall hold examples. (This enabled us to produce convincing holds?). Using fewer real training examples also made it easier to verify that our GAN generated something new!
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
+
+To run this locally, we used the [jaxrl]() conda environment from the BRIDGE Widow-X repo. We found that it has the dependencies necessary to run this code. 
+
+We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of the project, however, we used Google Colab. The main dependency that Colab did not have was trimesh. In the notebook, we have a cell that makes installing trimesh easier.
 
 ## Usage Guide
 
