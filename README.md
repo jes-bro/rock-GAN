@@ -148,6 +148,9 @@ We visualize the output using matplotlib.
 Here are some sample outputs!
 
 ## Bloopers
+Before we arrived at using voxels to represent our meshes, we went through many different data formats. We learned that it's really hard to triangulate sparse vertices that were randomly generated. We also learned that height maps of sparse vertices are just as sparce and therefore do not help with triangulation. We implemented raycasting to make the data less sparse, but that also yielded poor results after triangulation. 
+
+Here are some outputs from the other approaches we tried: 
 
 ## What We Learned
 
