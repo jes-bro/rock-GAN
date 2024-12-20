@@ -47,9 +47,15 @@ To overcome mode collapse, we implemented batch normalization, which helped make
 
 We also found out that using uni-modal data for our model, (ie. one kind of rock wall hold), made it easier to produce outputs that looked convincing. 
 
-Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48, 20, 10, and 3 real rock wall hold examples. All of these experiments enabled us to produce convincing holds! The models trained on fewer examples did turn out better. Using fewer real training examples also made it easier to verify that our GAN generated something new!
+Our data was ordered in such a way that holds close to each other were of the same type, which means our data was uni-modal for a given model when we limited its access to data.  We played around with giving the model 48, 32, 20, 10, and 3 real rock wall hold examples. All of these experiments enabled us to produce convincing holds! The models trained on 32 examples turned out best. Using fewer real training examples also made it easier to verify that our GAN generated something new!
 
 Here are some examples of the real training examples we gave a model and the generated output:
+
+### Results
+
+We 3D printed some of the holds we generated and made a cardboard/ 3D printed rock wall. Here are photos of the results!
+
+
 
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
