@@ -23,6 +23,11 @@ The real data used to train the GAN are open-source STL files of rock wall holds
 14. Citations
 
 ## The story 
+### Why this project?
+Jess had been thinking a lot about how she could leverage her skills in machine learning to enhance recreational experiences for people. Gabe wanted to pursue a project in 3D object generation. The two discussed their ideas and converged upon this project. 
+
+### Who is this for? 
+We imagine this project could be extended to take user data into account, such as preferred hold type, hand anatomy, and climbing goals. Given that extension, this project could create holds that are tailored to users. This could make climbing more accessible for people with hand motor impairments, texture sensitivities, or those who are beginners and would feel more supported via ergonomic holds. 
 
 ### Wall We Hit #1
 Before we arrived at using voxels to represent our meshes, we went through many different data formats. We learned that it is really difficult to triangulate sparse vertices that were randomly generated. We also learned that height maps of sparse vertices are just as sparce and therefore do not help with triangulation. We implemented raycasting to make the data less sparse, but that also yielded poor results after triangulation. 
