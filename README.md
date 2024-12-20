@@ -1,8 +1,10 @@
-# rock-GAN
-
+# TanGen
+<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="350" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="350" /> 
 ## Project Overview 
 
-This script trains a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to 3D print the holds. 
+TanGen, short for tangible generation, is a system for generating 3D rock wall hold STL files that you can 3D print.
+
+We trained a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to print the holds. 
 
 The real data used to train the GAN are open-source STL files of rock wall holds from Thingiverse. 
 
@@ -35,7 +37,7 @@ This is the STL of the height map. It did not slice well when we tried to print 
 <img src="photos/Screenshot%20from%202024-12-09%2001-19-33.png" alt="Project Logo" width="300" />
 
 ### How we overcame the wall
-We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
+We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. We were inspired to try them after reading [this MIT 3DGAN paper](http://3dgan.csail.mit.edu/). Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
 
 Here are some voxel visualizations: 
 
@@ -51,11 +53,13 @@ Our data was ordered in such a way that holds close to each other were of the sa
 
 Here are some examples of the real training examples we gave a model and the generated output:
 
+<img src="photos/Screenshot%20from%202024-12-20%2000-41-03.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2023-00-50.png" alt="Project Logo" width="300" height="300" />  <img src="photos/Screenshot%20from%202024-12-18%2023-25-26.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-42-57.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2023-16-11.png" alt="Project Logo" width="300" height="300" /> 
+
 ### Results
 
-We 3D printed some of the holds we generated and made a cardboard/ 3D printed rock wall. Here are photos of the results!
+We 3D printed some of the holds we generated and made a cardboard/3D printed rock wall. Here are photos of the results!
 
-
+<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="350" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="350" /> 
 
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
@@ -68,7 +72,7 @@ We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of t
 
 ### If you want to use your own data...
 First, run our data pre-processing script to generate numpy files of STLs:
-```python
+```bash
 cd rock-Gan
 python data_preprocessing.py
 ```
@@ -171,7 +175,7 @@ def __getitem__(self, idx):
 
 ### Defining the model architecture
 
-### Training Loop
+### Training loop
 To train the generator and the discriminator, we feed the generator random noise. Then, we feed the output from the generator into the discriminator. We also feed the discriminator real data. The discriminator determines whether output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. 
 
 By the end of training, when we feed the generator random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
@@ -200,7 +204,7 @@ mc.export("test5.stl")
 ## Visualization 
 We visualize the output using matplotlib. 
 
-Here are some sample outputs!
+Here are some sample outputs! (Different from the ones above)
 
 <img src="photos/Screenshot%20from%202024-12-18%2021-44-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18%2022-08-20.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2002-34-49.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-18 22-21-54.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19 02-42-57.png" alt="Project Logo" width="300" height="300" /> <img src="photos/Screenshot%20from%202024-12-19%2003-54-14.png" alt="Project Logo" width="300" height="300" /> 
 
@@ -208,4 +212,13 @@ Here are some sample outputs!
 
 One thing I learned is to be more organized about our experiments, automate them, and log the results. I think that would have spared us in some situations where we could not remember what we tried. 
 
-## Citations
+## Works Cited
+
+MIT 3D GAN Paper: [http://3dgan.csail.mit.edu/](http://3dgan.csail.mit.edu/)
+
+JaxRL Conda Environment: [https://github.com/rail-berkeley/bridge_data_v2](https://github.com/rail-berkeley/bridge_data_v2)
+
+PyTorch 3D Tutorial: [https://colab.research.google.com/github/facebookresearch/pytorch3d/blob/stable/docs/tutorials/deform_source_mesh_to_target_mesh.ipynb](https://colab.research.google.com/github/facebookresearch/pytorch3d/blob/stable/docs/tutorials/deform_source_mesh_to_target_mesh.ipynb)
+
+PyTorch DCGAN Tutorial: [https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html](https://pytorch.org/tutorials/beginner/dcgan_faces_tutorial.html)
+
