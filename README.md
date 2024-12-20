@@ -20,7 +20,8 @@ Ultimately, it was very difficult for our model to learn from our entire dataset
 9. Visualization
 10. Output gallery
 11. Bloopers
-12. Citations
+12. What We Learned
+13. Citations
 
 ## Data pre-processing
 Pre-processing consists of converting a directory of STL files of rock wall holds into scaled voxels using Trimesh. We then save matrix representations of these voxels using numpy arrays. These numpy arrays are stored in separate .npy files. Our custom dataloader class retrieves the data from one npy file at a time.
@@ -98,7 +99,7 @@ Here is how we save the data:
 np.save(f'processed_npys/{file_name_counter}.npy', reshaped_voxel)
 ```
 
-### Loading the data into a custom dataloader
+## Loading the data into a custom dataloader
 
 To load this data, we wrote a custom dataloader. In the get_item function, we retrieve each data point using its index to load it from the file it is stored in.
 
@@ -113,14 +114,14 @@ def __getitem__(self, idx):
         return dp.unsqueeze(0)
 ```
 
-### Defining the model architecture
+## Defining the model architecture
 
-### Training Loop
+## Training Loop
 To train the generator and the discriminator, we feed the generator random noise. Then, we feed the output from the generator into the discriminator. We also feed the discriminator real data. The discriminator determines whether output is real or fake, and then the generator and discriminator loss functions point them in the direction of correctness. For the generator, that means consolidating the noise into a convincing rock wall hold, and for the discriminator, that means identifying if the data it recieves is fake or real. The discriminator puts pressure on the generator to create more convincing holds so the generator can trick it. The two networks are in competition with each other. 
 
 By the end of training, when we feed the generator random noise, the output is a convincing rock wall hold! Whether these holds are printable varies based on the quality and continuity of the hold. Ideally, the generator learns to produce continuous holds because the training data is continuous.
 
-### Post-processing
+## Post-processing
 In post processing, we take the output of the generator, turn it into a trimesh voxel, and then use the marching cubes algorithm to convert it into a mesh. This mesh is then saved in an STL file that we can use to 3D print the ge`nerated rock wall holds.
 
 Here is the code we use to do that:
@@ -141,9 +142,13 @@ mc = new_voxel.marching_cubes
 mc.export("test5.stl")
 ```
 
-### Visualization 
+## Visualization 
 We visualize the output using matplotlib. 
 
 Here are some sample outputs!
 
-### Bloopers
+## Bloopers
+
+## What We Learned
+
+## Citations
