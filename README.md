@@ -72,7 +72,7 @@ We ran this locally on an Ubuntu 22.04 system with Python 3.10.13. For most of t
 
 ### If you want to use your own data...
 First, run our data pre-processing script to generate numpy files of STLs:
-```python
+```bash
 cd rock-Gan
 python data_preprocessing.py
 ```
