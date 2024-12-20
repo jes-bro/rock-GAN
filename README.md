@@ -1,5 +1,5 @@
 # TanGen
-<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="300" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="300" /> 
+<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="350" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="350" /> 
 ## Project Overview 
 
 TanGen, short for tangible generation, is a system for generating 3D rock wall hold STL files that you can 3D print.
@@ -37,7 +37,7 @@ This is the STL of the height map. It did not slice well when we tried to print 
 <img src="photos/Screenshot%20from%202024-12-09%2001-19-33.png" alt="Project Logo" width="300" />
 
 ### How we overcame the wall
-We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
+We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. We were inspired to try them after reading [this MIT 3DGAN paper](http://3dgan.csail.mit.edu/). Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
 
 Here are some voxel visualizations: 
 
@@ -59,7 +59,7 @@ Here are some examples of the real training examples we gave a model and the gen
 
 We 3D printed some of the holds we generated and made a cardboard/3D printed rock wall. Here are photos of the results!
 
-<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="300" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="300" /> 
+<img src="photos/IMG_5125.jpg" alt="Project Logo" width="300" height="350" /> <img src="photos/IMG_5128.jpg" alt="Project Logo" width="300" height="350" /> 
 
 ## Installation 
 Clone this repo to make local changes, or down the training script notebook and open it in Colab. Make sure to create a google drive (or local) folder of STLs for training. You can also use ours, which you can find [here](https://drive.google.com/drive/folders/11Fx5bIrvJ41V4tOJ1ArG449eosoynq8_?usp=sharing). 
