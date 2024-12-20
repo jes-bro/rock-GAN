@@ -89,7 +89,6 @@ z_padding = int(math.floor((32 - voxel_matrix.shape[2]) / 2))
 # Put the voxel occupancy in its designated spot in the empty 3D Matrix
 reshaped_voxel[x_padding: x_padding + voxel_matrix.shape[0], y_padding: y_padding + voxel_matrix.shape[1], z_padding: z_padding + voxel_matrix.shape[2]] = voxel_matrix
 ```
-### Saving the data 
 We save each voxel's matrix representation to a separate numpy file. Each npy file saves a single real rock wall hold voxel. Each numpy file is named with its corrresponding index in the data. To load this data, we wrote a custom dataloader. In the get_item function, we retrieve each data point using its index to load it from the file it is stored in.
 
 Here is how we save the data:
