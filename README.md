@@ -40,8 +40,6 @@ This is the STL of the height map. It did not slice well when we tried to print 
 ### How we overcame the wall
 We played around with voxel representations in trimesh, and found that the voxels were continuous off-the-bat. We were inspired to try them after reading [this MIT 3DGAN paper](http://3dgan.csail.mit.edu/). Additionally, the marching cubes algorithm makes it easy to triangulate voxels. This made voxels the ideal data format for our project. 
 
-Here are some voxel visualizations: 
-
 ### Wall we hit #2
 Ultimately, it was very difficult for our model to learn from our entire dataset of 220 holds. Our network architecture was small, and we did not have enough data to prevent mode collapse. We also had very diverse data and not a good means of clustering the data in the model's latent space. This made it so that regardless of noise input, for a given model, it would produce the same hold every time. We attempted to implement latent space clustering methods, but we did not have enough time to trouble shoot that implementation and make it work. 
 
