@@ -25,7 +25,7 @@ Pre-processing consists of converting a directory of STL files of rock wall hold
 
 ### Raw Mesh Data 
 
-### Our raw mesh data is loaded using trimesh. We downloaded a series of rock wall hold STL files from Thingiverse to obtain our original mesh data. Then, we used Trimesh to load the meshes from the STLs, voxelize the meshes, and save a matrix representation from each voxel as a numpy array. 
+Our raw mesh data is loaded using trimesh. We downloaded a series of rock wall hold STL files from Thingiverse to obtain our original mesh data. Then, we used Trimesh to load the meshes from the STLs, voxelize the meshes, and save a matrix representation from each voxel as a numpy array. 
 
 Our pre-processing code is as follows: 
 ```python
@@ -39,7 +39,29 @@ for filename in os.listdir(folderpath):
                 mesh = trimesh.load(file_path)
                 # .
                 # .
-                # ... mesh manipulation code ...
+                # ... Normalizing, scaling, storing code ...
+```
+### Normalizing and Scaling
+
+We load each mesh and normalize the vertices to be within a sphere with a radius of one, centered at (0, 0, 0). Then, we voxelize the mesh and scale it to be within a range of 32x32x32. We used the following [pytorch3D tutorial](https://colab.research.google.com/github/facebookresearch/pytorch3d/blob/stable/docs/tutorials/deform_source_mesh_to_target_mesh.ipynb) as the initial inspiration for how to do this, but ended up using Trimesh instead. 
+
+Our normalizing and scaling code is as follows: 
+```python
+mesh = trimesh.load(file_path)
+
+# Extract the faces and vertices
+verts = mesh.vertices   # (V, 3) array of vertices
+faces_idx = mesh.faces  # (F, 3) array of face indices
+
+# # Center and normalize the mesh
+center = mesh.center_mass
+verts_centered = verts - center
+
+scale = np.abs(verts_centered).max()
+verts_normalized = verts/scale
+
+# Remesh the normalized vertices
+normalized_mesh = trimesh.Trimesh(vertices=verts_normalized, faces=faces_idx)
 ```
 
 
