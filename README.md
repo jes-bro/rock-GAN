@@ -3,9 +3,9 @@
 
 ## Project Overview 
 
-TanGen, short for tangible generation, is a system for generating 3D rock wall hold STL files that you can 3D print.
+TanGen, short for tangible (rock climbing hold) generation, is a system for generating 3D rock wall hold STL files that you can 3D print.
 
-We trained a Generalized Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to print the holds. 
+We trained a Generative Adversarial Network (GAN) to generate rock wall hold voxels. We then turn these voxels into meshes and save those meshes as STL files to print the holds. 
 
 The real data used to train the GAN are open-source STL files of rock wall holds from Thingiverse. 
 
